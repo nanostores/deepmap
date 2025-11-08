@@ -1,10 +1,12 @@
 {
-  "name": "nanostores",
-  "version": "1.0.1",
-  "description": "A tiny (265 bytes) state manager for React/Preact/Vue/Svelte with many atomic tree-shakable stores",
+  "name": "@nanostores/deep-map",
+  "version": "0.0.1",
+  "description": "A helper for Nanostores to create deep maps",
   "keywords": [
     "store",
     "state",
+    "nanostores",
+    "deepmap",
     "state manager",
     "react",
     "react native",
@@ -38,6 +40,9 @@
       "url": "https://github.com/sponsors/ai"
     }
   ],
+  "peerDependencies": {
+    "nanostores": "^1.0.0"
+  },
   "devDependencies": {
     "@logux/eslint-config": "^56.1.0",
     "@sinonjs/fake-timers": "^15.0.0",
@@ -67,22 +72,6 @@
     "singleQuote": true,
     "trailingComma": "none"
   },
-  "size-limit": [
-    {
-      "name": "Atom",
-      "import": {
-        "./index.js": "{ atom }"
-      },
-      "limit": "265 B"
-    },
-    {
-      "name": "Popular Set",
-      "import": {
-        "./index.js": "{ map, computed }"
-      },
-      "limit": "797 B"
-    }
-  ],
   "clean-publish": {
     "cleanDocs": true
   }
