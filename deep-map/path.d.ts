@@ -1,4 +1,4 @@
-import type { ValueWithUndefinedForIndexSignatures } from '../map/index.js'
+import type { ValueWithUndefinedForIndexSignatures } from 'nanostores'
 
 type ConcatPath<T extends string, P extends string> = T extends ''
   ? P

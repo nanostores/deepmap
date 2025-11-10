@@ -8,7 +8,9 @@
     "allowJs": true,
     "strict": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+
+    "resolveJsonModule": true
   },
   "exclude": ["**/errors.ts"]
 }

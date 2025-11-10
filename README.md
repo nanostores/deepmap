@@ -1,6 +1,6 @@
 # Nano Stores DeepMap
 
-\<img align="right" width="92" height="92" title="Nano Stores logo"
+<img align="right" width="92" height="92" title="Nano Stores logo"
 src="[https://nanostores.github.io/nanostores/logo.svg](https://nanostores.github.io/nanostores/logo.svg)"\>
 
 helper for [Nanostores](https://github.com/nanostores/nanostores) to create deep maps.

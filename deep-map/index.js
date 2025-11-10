@@ -1,5 +1,5 @@
-import { atom } from '../atom/index.js'
-import { getPath, setPath } from './path.js'
+import { atom } from 'nanostores'
+import { getAllKeysFromPath, getPath, setPath, setByKey } from './path.js'
 
 export { getPath, setByKey, setPath } from './path.js'
 
@@ -19,4 +19,21 @@ export const deepMap = (initial = {}) => {
 export function getKey(store, key) {
   let value = store.get()
   return getPath(value, key)
+}
+
+export function updateKey(store, key, value) {
+  // 1. Obtiene el valor actual en esa ruta
+  let oldValue = getPath(store.get(), key);
+
+  // 2. Comprueba el TIPO del valor existente
+  if (Array.isArray(oldValue)) {
+    // Si es un array, reemplaza su contenido
+    oldValue.splice(0, oldValue.length, ...value);
+    store.setKey(key, oldValue); // Notifica el cambio
+    return;
+  }
+
+  // 3. Si es un objeto (o cualquier otra cosa), lo fusiona
+  let newValue = { ...oldValue, ...value };
+  store.setKey(key, newValue); // Notifica el cambio
 }

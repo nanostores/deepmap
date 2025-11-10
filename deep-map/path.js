@@ -36,11 +36,11 @@ export function setByKey(obj, splittedKeys, value) {
 
 const ARRAY_INDEX = /(.*)\[(\d+)\]/
 
-function getAllKeysFromPath(path) {
+export function getAllKeysFromPath(path) {
   return path.split('.').flatMap(key => getKeyAndIndicesFromKey(key))
 }
 
-function getKeyAndIndicesFromKey(key) {
+export function getKeyAndIndicesFromKey(key) {
   if (ARRAY_INDEX.test(key)) {
     let [, keyPart, index] = key.match(ARRAY_INDEX)
     return [...getKeyAndIndicesFromKey(keyPart), index]
@@ -49,7 +49,7 @@ function getKeyAndIndicesFromKey(key) {
 }
 
 const IS_NUMBER = /^\d+$/
-function ensureKey(obj, key, nextKey) {
+export function ensureKey(obj, key, nextKey) {
   if (key in obj) {
     return
   }

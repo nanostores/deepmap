@@ -1,5 +1,5 @@
-import type { WritableAtom } from '../atom/index.js'
-import type { AnyStore } from '../map/index.js'
+import type { WritableAtom, AnyStore } from 'nanostores';
+
 import type {
   AllPaths,
   BaseDeepMap,
@@ -125,3 +125,8 @@ export function getKey<
   T extends Record<string, unknown>,
   K extends AllPaths<T>
 >(store: AnyStore<T>, key: K): FromPath<T, K>
+
+export function updateKey<
+  T extends Record<string, unknown>,
+  K extends AllPaths<T>
+>(store: AnyStore<T>, key: K, value: FromPath<T, K>)

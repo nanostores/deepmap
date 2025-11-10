@@ -15,8 +15,8 @@
     "svelte"
   ],
   "scripts": {
+    "dev": "tsx watch TEST/deepmap.test.ts",
     "test:lint": "eslint .",
-    "test:coverage": "pnpm bnt --coverage",
     "test:types": "check-dts",
     "test:size": "size-limit",
     "test": "pnpm run /^test:/"
@@ -72,6 +72,15 @@
     "singleQuote": true,
     "trailingComma": "none"
   },
+  "size-limit": [
+    {
+      "name": "deep-map",
+      "import": {
+        "./index.js": "{ deepMap }"
+      },
+      "limit": "1.5 KB"
+    }
+  ],
   "clean-publish": {
     "cleanDocs": true
   }

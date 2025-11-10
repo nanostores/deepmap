@@ -2,7 +2,8 @@ import FakeTimers from '@sinonjs/fake-timers'
 import { deepStrictEqual, equal } from 'node:assert'
 import { test } from 'node:test'
 
-import { deepMap, getKey, map, onMount, onNotify } from '../index.js'
+import { deepMap } from '../index.js'
+import { getKey, map, onMount, onNotify } from 'nanostores'
 
 let clock = FakeTimers.install()
 
@@ -55,7 +56,7 @@ test('initializes store when it has listeners', () => {
     '2: b {"a":1,"b":1}'
   ])
 
-  let unbind3 = $store.listen(() => {})
+  let unbind3 = $store.listen(() => { })
   clock.runAll()
   deepStrictEqual(events, [
     'init',
@@ -93,10 +94,10 @@ test('supports complicated case of last unsubscribing', () => {
     }
   })
 
-  let unbind1 = $store.listen(() => {})
+  let unbind1 = $store.listen(() => { })
   unbind1()
 
-  let unbind2 = $store.listen(() => {})
+  let unbind2 = $store.listen(() => { })
   unbind2()
 
   clock.runAll()
@@ -224,13 +225,13 @@ test('supports conditional destroy', () => {
     }
   })
 
-  let unbind1 = $store.listen(() => {})
+  let unbind1 = $store.listen(() => { })
   unbind1()
   clock.runAll()
   deepStrictEqual(events, ['init', 'destroy'])
 
   destroyable = false
-  let unbind2 = $store.listen(() => {})
+  let unbind2 = $store.listen(() => { })
   unbind2()
   clock.runAll()
   deepStrictEqual(events, ['init', 'destroy', 'init'])
