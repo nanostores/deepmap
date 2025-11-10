@@ -1,5 +1,3 @@
-import type { ValueWithUndefinedForIndexSignatures } from 'nanostores'
-
 type ConcatPath<T extends string, P extends string> = T extends ''
   ? P
   : `${T}.${P}`
@@ -23,7 +21,9 @@ export type AllPaths<
   T,
   P extends string = '',
   MaxDepth extends number = 10
-> = T extends (infer U)[]
+> = T extends null | undefined
+  ? never 
+  : T extends (infer U)[]
   ?
       | `${P}[${number}]`
       | AllPaths<U, `${P}[${number}]`, Subtract<MaxDepth, 1>>
@@ -95,13 +95,13 @@ export type FromPathWithIndexSignatureUndefined<T, P> = T extends unknown
   ? NestedArrKey<T, P> extends never
     ? NestedObjKeyWithIndexSignatureUndefined<T, P> extends never
       ? P extends keyof T
-        ? ValueWithUndefinedForIndexSignatures<T, P>
+        ? T[P]
         : never
       : NestedObjKeyWithIndexSignatureUndefined<T, P>
     : NestedArrKey<T, P>
   : never
 
-export type BaseDeepMap = Record<string, unknown>
+export type BaseDeepMap = Record<string, unknown> | Array<unknown>;
 
 /**
  * Get a value by object path. `undefined` if key is missing.

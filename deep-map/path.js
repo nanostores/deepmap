@@ -5,6 +5,7 @@ export function getPath(obj, path) {
     if (res === undefined) {
       break
     }
+
     res = res[key]
   }
   return res
