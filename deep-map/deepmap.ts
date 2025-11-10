@@ -48,8 +48,13 @@ export function deepMap<T extends BaseDeepMap>(init?: T): DeepMapStore<T> {
         }
     }
 
-    $deepmap.updateKey = () => {
-
+    $deepmap.updateKey = <K extends AllPaths<T>>(
+        key: K,
+        value: FromPathWithIndexSignatureUndefined<T, K>
+    ): void =>{
+        let pathData = experimentalGetPath(key, $deepmap.value as BaseDeepMap)
+        console.log(pathData);
+        
     }
 
     return $deepmap
