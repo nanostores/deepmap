@@ -1,4 +1,4 @@
-import { BaseDeepMap, AllPaths, FromPath } from './path.js'
+import { BaseDeepMap, AllPaths, FromPath, FromPathWithIndexSignatureUndefined } from './path.js'
 
 function normalizePath(path: string): Array<string> {
     if (path === undefined) throw new Error('Path are required')
@@ -30,9 +30,8 @@ export function experimentalGetPath<
 
 export function experimentalSetPath<
     K extends AllPaths<T>,
-    V extends FromPath<T, K>,
     T extends BaseDeepMap
->(path: K, value: V, obj: T): T {
+>(path: K, value: FromPathWithIndexSignatureUndefined<T, K> | undefined, obj: T): T {
     let keys = normalizePath(path)
 
     if (path === '') {
@@ -62,6 +61,10 @@ export function experimentalSetPath<
     }
 
     const lastKey = keys[keys.length - 1];
-    pointer[lastKey] = value;
+    if (value === undefined && Array.isArray(pointer) && /^\d+$/.test(lastKey)) {
+        pointer.splice(Number(lastKey), 1);
+    } else {
+        pointer[lastKey] = value;
+    }
     return copy;
 }

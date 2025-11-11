@@ -5,7 +5,6 @@ import { experimentalGetPath, experimentalSetPath } from './pathEx';
 
 type DeepMapStore<T extends BaseDeepMap> = {
     value: T
-
     listen(
         listener: (
             value: T,
@@ -18,11 +17,11 @@ type DeepMapStore<T extends BaseDeepMap> = {
 
     setKey: <K extends AllPaths<T>>(
         key: K,
-        value: FromPathWithIndexSignatureUndefined<T, K>
+        value: FromPathWithIndexSignatureUndefined<T, K> | undefined
     ) => void
     updateKey: <K extends AllPaths<T>>(
         key: K,
-        value: FromPathWithIndexSignatureUndefined<T, K>
+        value: Partial<FromPathWithIndexSignatureUndefined<T, K>> | undefined
     ) => void
 
     subscribe(
@@ -39,7 +38,7 @@ export function deepMap<T extends BaseDeepMap>(init?: T): DeepMapStore<T> {
 
     $deepmap.setKey = <K extends AllPaths<T>>(
         key: K,
-        value: FromPathWithIndexSignatureUndefined<T, K>
+        value: FromPathWithIndexSignatureUndefined<T, K> | undefined
     ): void => {
         if (experimentalGetPath(key, $deepmap.value as BaseDeepMap) !== value) {
             let oldValue = $deepmap.value
@@ -50,11 +49,21 @@ export function deepMap<T extends BaseDeepMap>(init?: T): DeepMapStore<T> {
 
     $deepmap.updateKey = <K extends AllPaths<T>>(
         key: K,
-        value: FromPathWithIndexSignatureUndefined<T, K>
-    ): void =>{
-        let pathData = experimentalGetPath(key, $deepmap.value as BaseDeepMap)
-        console.log(pathData);
-        
+        value: Partial<FromPathWithIndexSignatureUndefined<T, K>> | undefined
+    ): void => {
+        const oldValue = experimentalGetPath(key, $deepmap.value as BaseDeepMap)
+        let newValue: any;
+
+        if (value === undefined) {
+            newValue = undefined;
+        } else if (typeof oldValue === 'object' && oldValue !== null && !Array.isArray(oldValue) &&
+            typeof value === 'object' && value !== null && !Array.isArray(value)) {
+            newValue = { ...oldValue, ...value };
+        } else {
+            newValue = value;
+        }
+
+        $deepmap.setKey(key, newValue as any);
     }
 
     return $deepmap
