@@ -15,7 +15,7 @@
     "svelte"
   ],
   "scripts": {
-    "dev": "tsx watch TEST/deepmap.test.ts",
+    "dev": "tsx watch deep-map/deepmap.test.ts",
     "test:lint": "eslint .",
     "test:types": "check-dts",
     "test:size": "size-limit",
@@ -76,7 +76,7 @@
     {
       "name": "deep-map",
       "import": {
-        "./index.js": "{ deepMap }"
+        "./deep-map/index.js": "{ deepMap }"
       },
       "limit": "1.5 KB"
     }

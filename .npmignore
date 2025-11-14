@@ -3,5 +3,6 @@
 **/*.test.*
 tsconfig.json
 test/
-
+React/
 img/
+package/
