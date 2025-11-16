@@ -53,4 +53,4 @@ jobs:
       - name: Build project
         run: pnpm build
       - name: Run unit tests
-        run: pnpm test:unit
+        run: pnpm test:coverage
