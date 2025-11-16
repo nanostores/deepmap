@@ -1,6 +1,6 @@
 import { atom } from 'nanostores'
-import type { WritableAtom } from 'nanostores';
-import { AllPaths, BaseDeepMap, FromPathWithIndexSignatureUndefined } from './path.d.js';
+import type { AnyStore, WritableAtom } from 'nanostores';
+import { AllPaths, BaseDeepMap, FromPath, FromPathWithIndexSignatureUndefined } from './path.d.js';
 import { getPath, isObject, setPath } from './path.js';
 
 export type DeepMapStore<T extends BaseDeepMap> = {
@@ -120,10 +120,44 @@ export function deepMap<T extends BaseDeepMap>(init?: T): DeepMapStore<T> {
 
     if (isObject(oldValue) && isObject(value)) {
       newValue = { ...oldValue as object, ...value };
+    } else if (Array.isArray(oldValue) && Array.isArray(value)) {
+      newValue = [...oldValue, ...value];
     }
 
     $deepmap.setKey(key, newValue as any);
   }
 
   return $deepmap
+}
+
+/**
+ * Get a value by key from a store with an object value.
+ * Works with `map`, `deepMap`, and `atom`.
+ *
+ * ```js
+ * import { getKey, map } from 'nanostores'
+ *
+ * const $user = map({ name: 'John', profile: { age: 30 } })
+ *
+ * // Simple key access
+ * getKey($user, 'name') // Returns 'John'
+ *
+ * // Nested access with dot notation
+ * getKey($user, 'profile.age') // Returns 30
+ *
+ * // Array access
+ * const $items = map({ products: ['apple', 'banana'] })
+ * getKey($items, 'products[1]') // Returns 'banana'
+ * ```
+ *
+ * @param store The store to get the value from.
+ * @param key The key to access. Can be a simple key or a path with dot notation.
+ * @returns The value for this key
+ */
+export function getKey<
+  T extends Record<string, unknown>,
+  K extends AllPaths<T> | ''
+>(store: AnyStore<T>, key: K): FromPath<T, K> {
+  const value = store.get()
+  return getPath(key, value)
 }

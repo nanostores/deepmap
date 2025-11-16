@@ -50,6 +50,8 @@ export function getPath<
   path: K,
   obj: T
 ): FromPath<T, K> {
+  if(path === '') return obj as any;
+
   const keys = normalizePath(path);
 
   const result = keys.reduce((current, key) => {

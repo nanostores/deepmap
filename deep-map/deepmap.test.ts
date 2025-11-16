@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { deepMap } from './deepmap.js'
+import { deepMap, getKey } from './deepmap.js'
 import { setPath, getPath, normalizePath } from './path.js'
 
 type Obj1 = {
@@ -74,6 +74,12 @@ describe('Test updateKey', () => {
     $storeObj1.updateKey('a', { d: true })
     expect($storeObj1.value).toEqual({ a: { b: 'value', d: true } })
   })
+
+  it('Should update/merge key in array', () => {
+    const $storeArr1 = deepMap<Obj1[]>([{ c: 'initial' }])
+    $storeArr1.updateKey('', [{c: 'updated'}])
+    expect($storeArr1.value).toEqual([{c: 'initial'}, {c: 'updated'}])
+  })
 })
 
 
@@ -142,5 +148,12 @@ describe('setPath', () => {
     expect(newState).toEqual({ items: ['a', 'b', 'c'] })
     expect(state).toEqual({ items: ['a', 'b'] })
     expect(newState.items).not.toBe(state.items)
+  })
+})
+
+describe('getKey', () => {
+  it('Should get a value from store', () => {
+    const $storeObj1 = deepMap<Obj1>({ c: 'initial' })
+    expect(getKey($storeObj1, 'c')).toBe('initial')
   })
 })

@@ -22,7 +22,7 @@
     "test:coverage": "vitest run --coverage",
     "test": "pnpm run /^test:/"
   },
-  "author": "Edgar Sanchez",
+  "author": "Edgar Sanchez <albertolifo@gmail.com>",
   "license": "MIT",
   "repository": "nanostores/deep-map",
   "sideEffects": false,
@@ -31,7 +31,7 @@
   "files": [
     "dist"
   ],
-  "exports": "./dist/deep-map/index.ts",
+  "exports": "./dist/deep-map/index.js",
   "engines": {
     "node": "^20.0.0 || >=22.0.0"
   },
