@@ -1,8 +1,8 @@
 import {
-    BaseDeepMap,
-    AllPaths,
-    FromPath,
-    FromPathWithIndexSignatureUndefined
+  BaseDeepMap,
+  AllPaths,
+  FromPath,
+  FromPathWithIndexSignatureUndefined
 } from './path.d.js'
 
 /**
@@ -16,17 +16,17 @@ import {
  * @returns Array of keys.
  */
 export function normalizePath(path: string): Array<string> {
-    if (path === undefined) throw new Error('Path are required')
-    const parts = path
-        .replace(/\[(\d+)\]/g, '.$1')   // 'a.b[10]' -> 'a.b.10'
-        .replace(/^\./, '')             // '[10]' -> '.10' -> '10'
-        .split('.');                    // 'a.b.c' -> ['a', 'b', 'c']
-    const keys = parts.filter((key, i) => key !== '');
-    return keys.length === 0 ? [''] : keys;
+  if (path === undefined) throw new Error('Path are required')
+  const parts = path
+    .replace(/\[(\d+)\]/g, '.$1')   // 'a.b[10]' -> 'a.b.10'
+    .replace(/^\./, '')             // '[10]' -> '.10' -> '10'
+    .split('.');                    // 'a.b.c' -> ['a', 'b', 'c']
+  const keys = parts.filter(key => key !== '');
+  return keys.length === 0 ? [''] : keys;
 }
 
 export function isObject(obj: any): boolean {
-    return typeof obj === 'object' && obj !== null && !Array.isArray(obj)
+  return typeof obj === 'object' && obj !== null && !Array.isArray(obj)
 }
 
 /**
@@ -44,20 +44,20 @@ export function isObject(obj: any): boolean {
  * @returns Value from object.
  */
 export function getPath<
-    K extends AllPaths<T> | '',
-    T extends BaseDeepMap
+  K extends AllPaths<T> | '',
+  T extends BaseDeepMap
 >(
-    path: K,
-    obj: T
+  path: K,
+  obj: T
 ): FromPath<T, K> {
-    const keys = normalizePath(path);
+  const keys = normalizePath(path);
 
-    const result = keys.reduce((current, key) => {
-        if (current === null || typeof current !== 'object') return undefined;
-        return (current as any)[key];
-    }, obj);
+  const result = keys.reduce((current, key) => {
+    if (current === null || typeof current !== 'object') return undefined;
+    return (current as any)[key];
+  }, obj);
 
-    return result as any;
+  return result as any;
 }
 
 /**
@@ -76,49 +76,49 @@ export function getPath<
  * @returns New object with value set.
  */
 export function setPath<
-    K extends AllPaths<T>,
-    T extends BaseDeepMap
+  K extends AllPaths<T>,
+  T extends BaseDeepMap
 >(
-    path: K,
-    value: FromPathWithIndexSignatureUndefined<T, K> | undefined,
-    obj: T
+  path: K,
+  value: FromPathWithIndexSignatureUndefined<T, K> | undefined,
+  obj: T
 ): T {
-    let keys = normalizePath(path)
+  const keys = normalizePath(path)
 
-    if (path === '') {
-        return value as any;
-    }
+  if (path === '') {
+    return value as any;
+  }
 
-    let copy = (Array.isArray(obj) ? [...obj] : { ...obj }) as any;
-    let pointer = copy;
+  const copy = (Array.isArray(obj) ? [...obj] : { ...obj }) as any;
+  let pointer = copy;
 
-    for (let i = 0; i < keys.length - 1; i++) {
-        const key = keys[i];
-        const nextKey = keys[i + 1];
+  for (let i = 0; i < keys.length - 1; i++) {
+    const key = keys[i];
+    const nextKey = keys[i + 1];
 
-        const originalNode = pointer[key];
-        const isNextNodeArray = /^\d+$/.test(nextKey);
+    const originalNode = pointer[key];
+    const isNextNodeArray = /^\d+$/.test(nextKey);
 
-        let newNode;
-        if (isNextNodeArray) {
-            newNode = Array.isArray(originalNode) ? [...originalNode] : [];
-        } else {
-            newNode = isObject(originalNode) ? { ...originalNode } : {};
-        }
-
-        pointer[key] = newNode;
-        pointer = pointer[key];
-    }
-
-    const lastKey = keys[keys.length - 1];
-    if (value === undefined) {
-        if (Array.isArray(pointer) && /^\d+$/.test(lastKey)) {
-            pointer.splice(Number(lastKey), 1);
-        } else if (typeof pointer === 'object' && pointer !== null) {
-            delete pointer[lastKey];
-        }
+    let newNode;
+    if (isNextNodeArray) {
+      newNode = Array.isArray(originalNode) ? [...originalNode] : [];
     } else {
-        pointer[lastKey] = value;
+      newNode = isObject(originalNode) ? { ...originalNode } : {};
     }
-    return copy;
+
+    pointer[key] = newNode;
+    pointer = pointer[key];
+  }
+
+  const lastKey = keys[keys.length - 1];
+  if (value === undefined) {
+    if (Array.isArray(pointer) && /^\d+$/.test(lastKey)) {
+      pointer.splice(Number(lastKey), 1);
+    } else if (typeof pointer === 'object' && pointer !== null) {
+      delete pointer[lastKey];
+    }
+  } else {
+    pointer[lastKey] = value;
+  }
+  return copy;
 }

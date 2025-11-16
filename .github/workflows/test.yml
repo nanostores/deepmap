@@ -50,5 +50,7 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --ignore-scripts
+      - name: Build project
+        run: pnpm build
       - name: Run unit tests
-        run: pnpm bnt
+        run: pnpm test:unit

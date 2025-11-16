@@ -7,10 +7,15 @@
     "skipLibCheck": true,
     "allowJs": true,
     "strict": true,
-    "noEmit": true,
+    "noEmit": false,
+    "declaration": true,
+    "outDir": "./dist",
     "jsx": "react",
-
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": false,
   },
-  "exclude": ["**/errors.ts"]
+  "exclude": [
+    "**/errors.ts",
+    "dist"
+  ]
 }

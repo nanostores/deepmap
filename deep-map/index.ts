@@ -1,9 +1,9 @@
 export {
-  deepMap
+  deepMap, type DeepMapStore
 } from './deepmap.js'
 
 
-export { 
+export {
   getPath,
   setPath,
   normalizePath

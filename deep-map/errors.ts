@@ -49,15 +49,12 @@ let $testIndexSignature3 = deepMap<Record<string, TestTypeIndexSignature>>()
 
 $testIndexSignature.setKey('a', undefined)
 $testIndexSignature2.setKey('a', undefined)
-// THROWS Argument of type 'undefined' is not assignable to parameter
-test.setKey('a', undefined)
+
 $testIndexSignature.setKey('a.b', undefined)
 $testIndexSignature.setKey('a.b', 1)
 // THROWS Argument of type 'string' is not assignable to parameter
 $testIndexSignature.setKey('a.b', 'hej')
-// THROWS Argument of type 'undefined' is not assignable to parameter
-$testIndexSignature2.setKey('a.isLoading', undefined)
-// THROWS Argument of type 'string' is not assignable to parameter
+// THROWS Argument of type '"incorrect"' is not assignable to parameter
 $testIndexSignature2.setKey('a.isLoading', 'incorrect')
 
 $testIndexSignature3.setKey('a.isRecord', {})

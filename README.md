@@ -3,7 +3,7 @@
 <img align="right" width="64" height="64" title="Nano Stores logo"
 src="https://nanostores.github.io/nanostores/logo.svg">
 
-Deep maps extensionfor [Nano Stores](https://github.com/nanostores/nanostores) state manager.
+Deep maps extension for [Nano Stores](https://github.com/nanostores/nanostores) state manager.
 
 ## Install
 
@@ -20,7 +20,7 @@ Use `setKey` to create, replace, or delete any value at a specific path.
 ```ts
 import { deepMap } from '@nanostores/deep-map'
 
-type storeProps = {
+type StoreProps = {
   user?: {
     name: string
     age: number
@@ -28,12 +28,12 @@ type storeProps = {
   count?: number
 }
 
-const $store = deepMap<storeProps>({ 
+const $store = deepMap<StoreProps>({
   user: {
     name: 'Luke',
     age: 19,
-  } 
-  count: 0, 
+  }
+  count: 0,
 })
 
 // Replaces the value at 'count'
@@ -44,7 +44,7 @@ Use `updateKey` to merge new data into an existing object. If the target isn't a
 
 ```ts
 // 'updateKey' merges, keeping 'name' and only changing 'age'
-$store.updateKey('user', { age: 42 }) 
+$store.updateKey('user', { age: 42 })
 // -> { user: { name: 'Luke', age: 42 }, ... }
 ```
 To delete a property from an object or an item from an array, just set its path to `undefined`.
@@ -91,7 +91,7 @@ type StoreProps = {
 
 const $store = deepMap<StoreProps>({})
 
-$store.setKey('count', 'randomString') 
+$store.setKey('count', 'randomString')
 // Type Error -> 'string' is not assignable to 'number'
 
 // IMPORTANT: an empty path ('') is treated as the root object

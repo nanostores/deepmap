@@ -1,9 +1,10 @@
-import loguxTsConfig from '@logux/eslint-config/ts'
-
+import js from '@eslint/js';
+import tseslint from 'typescript-eslint';
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
-  { ignores: ['**/errors.ts'] },
-  ...loguxTsConfig,
+  { ignores: ['**/errors.ts', 'dist/'] },
+  js.configs.recommended,
+  ...tseslint.configs.recommended,
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
@@ -11,18 +12,6 @@ export default [
       'camelcase': 'off',
       'consistent-return': 'off',
       'symbol-description': 'off'
-    }
-  },
-  {
-    files: ['deprecated/index.js'],
-    rules: {
-      'no-console': 'off'
-    }
-  },
-  {
-    files: ['**/*.test.js', '**/*.test.ts'],
-    rules: {
-      'n/no-unsupported-features/node-builtins': 'off'
     }
   },
   {
@@ -34,8 +23,7 @@ export default [
       '@typescript-eslint/no-unsafe-call': 'off',
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
-      '@typescript-eslint/unbound-method': 'off',
-      'n/no-unsupported-features/node-builtins': 'off'
+      '@typescript-eslint/unbound-method': 'off'
     }
   }
 ]

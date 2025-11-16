@@ -92,7 +92,9 @@ export type FromPath<T, P> = T extends unknown
   : never
 
 export type FromPathWithIndexSignatureUndefined<T, P> = T extends unknown
-  ? NestedArrKey<T, P> extends never
+  ? P extends ''
+  ? T
+  : NestedArrKey<T, P> extends never
   ? NestedObjKeyWithIndexSignatureUndefined<T, P> extends never
   ? P extends keyof T
   ? T[P]
