@@ -1,5 +1,5 @@
 {
-  "name": "@nanostores/deep-map",
+  "name": "@nanostores/deepmap",
   "version": "0.0.1",
   "description": "A helper for Nanostores to create deep maps",
   "keywords": [
@@ -15,64 +15,45 @@
     "svelte"
   ],
   "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch deep-map/deepmap.test.ts",
     "test:lint": "eslint .",
-    "test:coverage": "pnpm bnt --coverage",
     "test:types": "check-dts",
-    "test:size": "size-limit",
+    "test:coverage": "vitest run --coverage",
     "test": "pnpm run /^test:/"
   },
-  "author": "Andrey Sitnik <andrey@sitnik.ru>",
+  "author": "Edgar Sanchez <albertolifo@gmail.com>",
   "license": "MIT",
-  "repository": "nanostores/nanostores",
+  "repository": "nanostores/deep-map",
   "sideEffects": false,
   "type": "module",
-  "types": "./index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "exports": {
-    ".": "./index.js",
-    "./package.json": "./package.json"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
   },
   "engines": {
     "node": "^20.0.0 || >=22.0.0"
   },
-  "funding": [
-    {
-      "type": "github",
-      "url": "https://github.com/sponsors/ai"
-    }
-  ],
   "peerDependencies": {
     "nanostores": "^1.0.0"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^56.1.0",
-    "@sinonjs/fake-timers": "^15.0.0",
-    "@size-limit/preset-small-lib": "^11.2.0",
-    "@types/node": "^24.9.1",
-    "@types/sinonjs__fake-timers": "^15.0.0",
-    "@types/ws": "^8.18.1",
-    "@typescript-eslint/eslint-plugin": "^8.46.2",
-    "@typescript-eslint/parser": "^8.46.2",
-    "actions-up": "^1.4.2",
-    "benchmark": "^2.1.4",
-    "better-node-test": "^0.8.3",
+    "@eslint/js": "^9.39.1",
+    "@vitest/coverage-v8": "^4.0.9",
     "check-dts": "^0.9.0",
-    "clean-publish": "^6.0.0",
-    "eslint": "^9.38.0",
-    "multiocular": "^0.8.1",
-    "nanodelay": "^2.0.2",
-    "size-limit": "^11.2.0",
+    "eslint": "^9.39.1",
+    "jiti": "^2.6.1",
     "tsx": "^4.20.6",
-    "typescript": "^5.9.3"
-  },
-  "prettier": {
-    "arrowParens": "avoid",
-    "jsxSingleQuote": false,
-    "quoteProps": "consistent",
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none"
-  },
-  "clean-publish": {
-    "cleanDocs": true
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.4",
+    "vitest": "^4.0.9"
   }
 }

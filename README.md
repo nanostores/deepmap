@@ -1,9 +1,9 @@
 # Nano Stores DeepMap
 
-\<img align="right" width="92" height="92" title="Nano Stores logo"
-src="[https://nanostores.github.io/nanostores/logo.svg](https://nanostores.github.io/nanostores/logo.svg)"\>
+<img align="right" width="64" height="64" title="Nano Stores logo"
+src="https://nanostores.github.io/nanostores/logo.svg">
 
-helper for [Nanostores](https://github.com/nanostores/nanostores) to create deep maps.
+Deep maps extension for [Nano Stores](https://github.com/nanostores/nanostores) state manager.
 
 ## Install
 
@@ -13,51 +13,89 @@ npm install @nanostores/deep-map
 
 ## Usage
 
-### Basic Usage
-
 Import `deepMap` from this package instead of `nanostores` (which no longer has it).
+
+Use `setKey` to create, replace, or delete any value at a specific path.
 
 ```ts
 import { deepMap } from '@nanostores/deep-map'
 
-const $store = deepMap({ 
-  count: 0, 
+type StoreProps = {
+  user?: {
+    name: string
+    age: number
+  }
+  count?: number
+}
+
+const $store = deepMap<StoreProps>({
   user: {
     name: 'Luke',
     age: 19,
-    image_url: 'hhttps://example.com/default.png'
-  } 
+  }
+  count: 0,
 })
 
-$store.setKey('count', 1)
+// Replaces the value at 'count'
+$store.setKey('count', 1) // -> { ...restValues, count: 1 }
+
+```
+Use `updateKey` to merge new data into an existing object. If the target isn't an object, it will be replaced.
+
+```ts
+// 'updateKey' merges, keeping 'name' and only changing 'age'
+$store.updateKey('user', { age: 42 })
+// -> { user: { name: 'Luke', age: 42 }, ... }
+```
+To delete a property from an object or an item from an array, just set its path to `undefined`.
+
+```ts
+// Deletes 'count' from the store
+$store.setKey('count', undefined)
+// -> { user: { name: 'Luke', age: 42 } }
+```
+### Working with Arrays
+DeepMap fully supports arrays as the root value or nested within your state. You can use standard array syntax [index] in your paths.
+
+```ts
+//Before
+const $store = deepMap<storeProps[]>([{}]) // Type Error
+
+//After
+const $store = deepMap<storeProps[]>([{}]) // OK
+
 ```
 
 ### TypeScript Support
 
-The package is written in TypeScript and provides type inference:
+The package is written in TypeScript and provides autocomplete for all methods and properties.
 
 ```ts
-interface User {
-  id: number
-  name: string
-  settings: {
-    theme: 'light' | 'dark'
-    notifications: boolean
-  }
+// Define your type with 'type' keyword instead of 'interface'
+// for better autocomplete
+type UserType = {
+  id?: string
 }
 
-const $user = deepMap<User>({
-  id: 1,
-  name: 'John',
-  settings: {
-    theme: 'light',
-    notifications: true
-  }
-})
+const $userT = deepMap<UserType>({})
 
-// TypeScript (with a proper path utility type) can validate paths
-$user.setKey('settings.theme', 'dark') // ✓ OK
-$user.s_etKey('settings.theme', 'blue') // ✗ Type Error
+$userT.setKey('id', 'uuidString') // Suggestion autocomplete
+
+```
+Typescript automatically infers the type of the store value.
+
+```ts
+type StoreProps = {
+  count?: number
+}
+
+const $store = deepMap<StoreProps>({})
+
+$store.setKey('count', 'randomString')
+// Type Error -> 'string' is not assignable to 'number'
+
+// IMPORTANT: an empty path ('') is treated as the root object
+$someStore.setKey('', 'randomString') // Replaces the entire store
 ```
 
 ## License
@@ -66,4 +104,4 @@ MIT
 
 ## Credits
 
-  * [Nanostores](https://github.com/nanostores/nanostores) - The original state manager.
+  * [Nano stores](https://github.com/nanostores/nanostores), the original state manager.

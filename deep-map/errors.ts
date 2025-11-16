@@ -1,4 +1,4 @@
-import { deepMap, getKey, atom, map } from '../index.js'
+import { deepMap } from './index.js'
 
 type TestType =
   | { id: string; isLoading: true }
@@ -49,15 +49,12 @@ let $testIndexSignature3 = deepMap<Record<string, TestTypeIndexSignature>>()
 
 $testIndexSignature.setKey('a', undefined)
 $testIndexSignature2.setKey('a', undefined)
-// THROWS Argument of type 'undefined' is not assignable to parameter
-test.setKey('a', undefined)
+
 $testIndexSignature.setKey('a.b', undefined)
 $testIndexSignature.setKey('a.b', 1)
 // THROWS Argument of type 'string' is not assignable to parameter
 $testIndexSignature.setKey('a.b', 'hej')
-// THROWS Argument of type 'undefined' is not assignable to parameter
-$testIndexSignature2.setKey('a.isLoading', undefined)
-// THROWS Argument of type 'string' is not assignable to parameter
+// THROWS Argument of type '"incorrect"' is not assignable to parameter
 $testIndexSignature2.setKey('a.isLoading', 'incorrect')
 
 $testIndexSignature3.setKey('a.isRecord', {})
@@ -77,30 +74,3 @@ $testIndexSignature3.setKey('a.isArray[0]', {
 $testIndexSignature3.setKey('a.isArray[0].id', '123')
 // THROWS Argument of type 'number' is not assignable to parameter
 $testIndexSignature3.setKey('a.isArray[0].id', 123)
-
-let $store = map({
-  user: {
-    name: 'John'
-  }
-})
-
-let $store2 = atom('john')
-
-let $store3 = atom({
-  user: {
-    name: 'John'
-  }
-})
-// THROWS Argument of type '"user.nejm"' is not assignable to parameter of type '"user" | "user.name"'.
-let throws = getKey($store, 'user.nejm')
-
-// THROWS Argument of type '"user[0]"' is not assignable to parameter of type '"user" | "user.name"'.
-let throws1 = getKey($store, 'user[0]')
-
-// THROWS Argument of type '"usser"' is not assignable to parameter of type '"user" | "user.name"'.
-let throws2 = getKey($store, 'usser')
-
-// THROWS Argument of type 'PreinitializedWritableAtom<string> & object' is not assignable to parameter of type 'AnyStore<Record<string, unknown>>'.
-let throws3 = getKey($store2, 'john')
-
-let works = getKey($store3, 'user.name')

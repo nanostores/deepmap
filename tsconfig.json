@@ -7,8 +7,20 @@
     "skipLibCheck": true,
     "allowJs": true,
     "strict": true,
-    "noEmit": true,
-    "jsx": "react"
+    "noEmit": false,
+    "declaration": true,
+    "outDir": "./dist",
+    "jsx": "react",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": false,
   },
-  "exclude": ["**/errors.ts"]
+  "exclude": [
+    "**/errors.ts",
+    "**/*.test.ts",
+    "dist",
+    "vitest.config.ts",
+    "eslint.config.ts",
+    "coverage",
+    "TEST"
+  ]
 }

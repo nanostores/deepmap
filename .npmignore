@@ -1,7 +1,8 @@
 **/types.ts
 **/errors.ts
-**/*.test.*
+**/*.test.ts
 tsconfig.json
 test/
-
+React/
 img/
+
