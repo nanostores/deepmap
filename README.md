@@ -3,7 +3,7 @@
 <img align="right" width="64" height="64" title="Nano Stores logo"
 src="https://nanostores.github.io/nanostores/logo.svg">
 
-helper for [Nanostores](https://github.com/nanostores/nanostores) to create deep maps.
+Deep maps extensionfor [Nano Stores](https://github.com/nanostores/nanostores) state manager.
 
 ## Install
 
