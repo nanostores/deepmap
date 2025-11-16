@@ -15,7 +15,7 @@ npm install @nanostores/deep-map
 
 Import `deepMap` from this package instead of `nanostores` (which no longer has it).
 
-Use setKey to create, replace, or delete any value at a specific path.
+Use `setKey` to create, replace, or delete any value at a specific path.
 
 ```ts
 import { deepMap } from '@nanostores/deep-map'
