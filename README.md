@@ -40,7 +40,7 @@ const $store = deepMap<storeProps>({
 $store.setKey('count', 1) // -> { ...restValues, count: 1 }
 
 ```
-Use updateKey to merge new data into an existing object. If the target isn't an object, it will be replaced.
+Use `updateKey` to merge new data into an existing object. If the target isn't an object, it will be replaced.
 
 ```ts
 // 'updateKey' merges, keeping 'name' and only changing 'age'
