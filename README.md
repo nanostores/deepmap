@@ -47,7 +47,7 @@ Use `updateKey` to merge new data into an existing object. If the target isn't a
 $store.updateKey('user', { age: 42 }) 
 // -> { user: { name: 'Luke', age: 42 }, ... }
 ```
-To delete a property from an object or an item from an array, just set its path to undefined.
+To delete a property from an object or an item from an array, just set its path to `undefined`.
 
 ```ts
 // Deletes 'count' from the store
