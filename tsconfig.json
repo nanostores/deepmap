@@ -16,6 +16,11 @@
   },
   "exclude": [
     "**/errors.ts",
-    "dist"
+    "**/*.test.ts",
+    "dist",
+    "vitest.config.ts",
+    "eslint.config.ts",
+    "coverage",
+    "TEST"
   ]
 }

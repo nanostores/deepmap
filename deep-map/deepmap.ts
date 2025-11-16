@@ -1,6 +1,6 @@
 import { atom } from 'nanostores'
 import type { AnyStore, WritableAtom } from 'nanostores';
-import { AllPaths, BaseDeepMap, FromPath, FromPathWithIndexSignatureUndefined } from './path.d.js';
+import type { AllPaths, BaseDeepMap, FromPath, FromPathWithIndexSignatureUndefined } from './path.types.js';
 import { getPath, isObject, setPath } from './path.js';
 
 export type DeepMapStore<T extends BaseDeepMap> = {

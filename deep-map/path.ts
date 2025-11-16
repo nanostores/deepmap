@@ -1,9 +1,9 @@
-import {
+import type {
   BaseDeepMap,
   AllPaths,
   FromPath,
   FromPathWithIndexSignatureUndefined
-} from './path.d.js'
+} from './path.types.js'
 
 /**
  * Normalize path to array of keys.

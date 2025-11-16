@@ -104,4 +104,4 @@ MIT
 
 ## Credits
 
-  * [Nanostores](https://github.com/nanostores/nanostores) - The original state manager.
+  * [Nano stores](https://github.com/nanostores/nanostores), the original state manager.

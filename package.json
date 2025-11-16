@@ -1,5 +1,5 @@
 {
-  "name": "@nanostores/deep-map",
+  "name": "@nanostores/deepmap",
   "version": "0.0.1",
   "description": "A helper for Nanostores to create deep maps",
   "keywords": [
@@ -27,11 +27,18 @@
   "repository": "nanostores/deep-map",
   "sideEffects": false,
   "type": "module",
-  "types": "./dist/deep-map/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
-  "exports": "./dist/deep-map/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "engines": {
     "node": "^20.0.0 || >=22.0.0"
   },
