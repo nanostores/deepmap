@@ -8,7 +8,7 @@ Deep maps extension for [Nano Stores](https://github.com/nanostores/nanostores) 
 ## Install
 
 ```sh
-npm install @nanostores/deep-map
+npm install @nanostores/deepmap
 ```
 
 ## Usage
@@ -18,7 +18,7 @@ Import `deepMap` from this package instead of `nanostores` (which no longer has 
 Use `setKey` to create, replace, or delete any value at a specific path.
 
 ```ts
-import { deepMap } from '@nanostores/deep-map'
+import { deepMap } from '@nanostores/deepmap'
 
 type StoreProps = {
   user?: {
@@ -59,10 +59,10 @@ DeepMap fully supports arrays as the root value or nested within your state. You
 
 ```ts
 //Before
-const $store = deepMap<storeProps[]>([{}]) // Type Error
+const $store = deepMap<StoreProps[]>([{}]) // Type Error
 
 //After
-const $store = deepMap<storeProps[]>([{}]) // OK
+const $store = deepMap<StoreProps[]>([{}]) // OK
 
 ```
 
