@@ -104,4 +104,4 @@ MIT
 
 ## Credits
 
-  * [Nano stores](https://github.com/nanostores/nanostores), the original state manager.
+  * [Dan Kozlov](https://github.com/dkzlv) the author of `deepmap()` in [Nano stores](https://github.com/nanostores/nanostores) core.
