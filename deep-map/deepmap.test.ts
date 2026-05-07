@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { deepMap, getKey } from './deepmap.js'
+import { deepMap } from './deepmap.js'
 import { setPath, getPath, normalizePath } from './path.js'
 
 type Obj1 = {
@@ -154,6 +154,6 @@ describe('setPath', () => {
 describe('getKey', () => {
   it('Should get a value from store', () => {
     const $storeObj1 = deepMap<Obj1>({ c: 'initial' })
-    expect(getKey($storeObj1, 'c')).toBe('initial')
+    expect($storeObj1.getKey('c')).toBe('initial')
   })
 })

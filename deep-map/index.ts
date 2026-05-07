@@ -1,6 +1,5 @@
 export {
   deepMap,
-  getKey,
   type DeepMapStore
 } from './deepmap.js'
 

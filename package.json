@@ -1,6 +1,6 @@
 {
   "name": "@nanostores/deepmap",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A helper for Nanostores to create deep maps",
   "keywords": [
     "store",
@@ -24,7 +24,7 @@
   },
   "author": "Edgar Sanchez <albertolifo@gmail.com>",
   "license": "MIT",
-  "repository": "nanostores/deep-map",
+  "repository": "nanostores/deepmap",
   "sideEffects": false,
   "type": "module",
   "main": "./dist/index.js",
